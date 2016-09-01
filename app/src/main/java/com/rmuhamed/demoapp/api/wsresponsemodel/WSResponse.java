@@ -1,5 +1,5 @@
 
-package com.rmuhamed.demoapp.api.entities;
+package com.rmuhamed.demoapp.api.wsresponsemodel;
 
 import java.util.ArrayList;
 import java.util.List;

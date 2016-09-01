@@ -1,4 +1,4 @@
-package com.rmuhamed.demoapp.api;
+package com.rmuhamed.demoapp.api.request;
 
 import com.rmuhamed.demoapp.model.Entity;
 

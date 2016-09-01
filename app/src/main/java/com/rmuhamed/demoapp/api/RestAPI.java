@@ -6,6 +6,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.rmuhamed.demoapp.api.request.GetEntitiesRequest;
+import com.rmuhamed.demoapp.api.request.GetEntitiesRequestCallback;
 import com.rmuhamed.demoapp.model.Entity;
 
 import java.util.List;

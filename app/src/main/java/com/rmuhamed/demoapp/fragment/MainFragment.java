@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rmuhamed.demoapp.R;
-import com.rmuhamed.demoapp.api.GetEntitiesRequestCallback;
+import com.rmuhamed.demoapp.api.request.GetEntitiesRequestCallback;
 import com.rmuhamed.demoapp.api.RestAPI;
 import com.rmuhamed.demoapp.model.Entity;
 

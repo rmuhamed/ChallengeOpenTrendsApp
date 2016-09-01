@@ -1,5 +1,5 @@
 
-package com.rmuhamed.demoapp.api.entities;
+package com.rmuhamed.demoapp.api.wsresponsemodel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
