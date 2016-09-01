@@ -13,6 +13,7 @@ import com.rmuhamed.demoapp.R;
 import com.rmuhamed.demoapp.api.request.GetEntitiesRequestCallback;
 import com.rmuhamed.demoapp.api.RestAPI;
 import com.rmuhamed.demoapp.model.Entity;
+import com.rmuhamed.demoapp.ui.adapter.EntityRecyclerAdapter;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainFragment extends Fragment implements GetEntitiesRequestCallback {
+    private EntityRecyclerAdapter anAdapter;
 
     @BindView(R.id.recycler_list)
     RecyclerView anEntityRecyclerList;
@@ -46,8 +48,8 @@ public class MainFragment extends Fragment implements GetEntitiesRequestCallback
     }
 
     @Override
-    public void onSuccess(List<Entity> response) {
-        //TODO: Fill Adapter with data
+    public void onSuccess(List<Entity> entities) {
+        this.anAdapter.fill(entities);
     }
 
     @Override
@@ -58,8 +60,9 @@ public class MainFragment extends Fragment implements GetEntitiesRequestCallback
     private void setupRecyclerList() {
         LinearLayoutManager aLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
 
-        this.anEntityRecyclerList.setLayoutManager(aLayoutManager);
-        this.anEntityRecyclerList.setAdapter(null);
+        this.anAdapter = new EntityRecyclerAdapter(this.getContext());
 
+        this.anEntityRecyclerList.setLayoutManager(aLayoutManager);
+        this.anEntityRecyclerList.setAdapter(this.anAdapter);
     }
 }

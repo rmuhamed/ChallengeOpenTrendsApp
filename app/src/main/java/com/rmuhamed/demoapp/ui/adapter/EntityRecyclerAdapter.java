@@ -49,4 +49,10 @@ public class EntityRecyclerAdapter extends RecyclerView.Adapter<EntityViewHolder
     public int getItemCount() {
         return this.items != null ? this.items.size() : 0;
     }
+
+    public void fill(List<Entity> entities) {
+        this.items = entities;
+        //FORCE redraw
+        this.notifyDataSetChanged();
+    }
 }
