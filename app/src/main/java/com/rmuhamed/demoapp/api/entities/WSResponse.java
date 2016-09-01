@@ -1,5 +1,5 @@
 
-package com.rmuhamed.demoapp.api;
+package com.rmuhamed.demoapp.api.entities;
 
 import java.util.ArrayList;
 import java.util.List;

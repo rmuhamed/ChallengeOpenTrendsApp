@@ -7,6 +7,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonRequest;
 import com.google.gson.Gson;
+import com.rmuhamed.demoapp.api.entities.Result;
+import com.rmuhamed.demoapp.api.entities.WSResponse;
 import com.rmuhamed.demoapp.model.Entity;
 
 import java.util.ArrayList;
