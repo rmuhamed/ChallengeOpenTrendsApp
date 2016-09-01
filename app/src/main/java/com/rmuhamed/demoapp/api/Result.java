@@ -3,6 +3,7 @@ package com.rmuhamed.demoapp.api;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.rmuhamed.demoapp.model.Entity;
 
 public class Result {
 
