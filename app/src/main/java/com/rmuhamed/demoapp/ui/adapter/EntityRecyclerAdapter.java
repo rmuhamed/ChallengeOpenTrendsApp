@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
 import com.rmuhamed.demoapp.R;
 import com.rmuhamed.demoapp.model.Entity;
 import com.rmuhamed.demoapp.utils.RemoteImageLoader;
