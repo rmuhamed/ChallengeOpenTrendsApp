@@ -1,4 +1,4 @@
-package com.rmuhamed.demoapp.activity;
+package com.rmuhamed.demoapp.ui.activity;
 
 import android.content.Intent;
 import android.os.CountDownTimer;
