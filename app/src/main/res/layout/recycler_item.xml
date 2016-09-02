@@ -16,11 +16,10 @@
         <ImageView
             android:id="@+id/item_picture_iv"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="0.25"
             android:scaleType="centerCrop"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
+            android:layout_margin="5dp"
             tools:src="@mipmap/ic_launcher" />
 
         <TextView
@@ -30,6 +29,7 @@
             android:layout_weight="0.75"
             android:singleLine="true"
             android:ellipsize="end"
+            android:textColor="@android:color/black"
             tools:text="@string/dummy_item_label_text_resource" />
 
     </LinearLayout>
@@ -37,6 +37,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginBottom="2.5dp"
+        android:layout_marginTop="2.5dp"
         android:background="@android:color/darker_gray" />
 
 </LinearLayout>
