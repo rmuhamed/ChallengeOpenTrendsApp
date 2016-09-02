@@ -1,6 +1,7 @@
 package com.rmuhamed.demoapp.ui.fragment;
 
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +24,8 @@ import butterknife.ButterKnife;
 public class MainFragment extends Fragment implements GetEntitiesRequestCallback {
     private EntityRecyclerAdapter anAdapter;
 
+    private View rootView;
+
     @BindView(R.id.recycler_list)
     RecyclerView anEntityRecyclerList;
 
@@ -30,13 +33,13 @@ public class MainFragment extends Fragment implements GetEntitiesRequestCallback
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View contentView = inflater.inflate(R.layout.fragment_main, container, false);
+        this.rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-        ButterKnife.bind(this, contentView);
+        ButterKnife.bind(this, this.rootView);
 
         this.setupRecyclerList();
 
-        return contentView;
+        return this.rootView;
     }
 
     @Override
@@ -54,7 +57,7 @@ public class MainFragment extends Fragment implements GetEntitiesRequestCallback
 
     @Override
     public void onError(String errorMessage) {
-        //TODO: Inform error using SnackBar with retry logic
+        Snackbar.make(this.rootView, errorMessage, Snackbar.LENGTH_LONG).show();
     }
 
     private void setupRecyclerList() {
