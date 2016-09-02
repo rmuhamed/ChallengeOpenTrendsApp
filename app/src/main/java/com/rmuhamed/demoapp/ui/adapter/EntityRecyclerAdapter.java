@@ -38,7 +38,7 @@ public class EntityRecyclerAdapter extends RecyclerView.Adapter<EntityViewHolder
 
         assert anEntityForPosition != null;
 
-        holder.label.setText(anEntityForPosition.getNumber());
+        holder.label.setText(anEntityForPosition.getGender() != null ? anEntityForPosition.getGender() : "Some info for ITEM");
 
         RemoteImageLoader remoteImageLoader = new RemoteImageLoader(this.context, anEntityForPosition.getThumbnail());
         remoteImageLoader.loadInto(holder.picture);

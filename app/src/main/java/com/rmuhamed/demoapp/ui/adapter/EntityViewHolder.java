@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.rmuhamed.demoapp.R;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by rmuhamed on jueves.
@@ -22,5 +23,6 @@ public class EntityViewHolder extends RecyclerView.ViewHolder {
 
     public EntityViewHolder(View itemView) {
         super(itemView);
+        ButterKnife.bind(this, itemView);
     }
 }

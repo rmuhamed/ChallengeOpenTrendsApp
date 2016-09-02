@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.rmuhamed.demoapp.api.wsresponsemodel.Result;
 import com.rmuhamed.demoapp.api.wsresponsemodel.WSResponse;
 import com.rmuhamed.demoapp.model.Entity;
+import com.rmuhamed.demoapp.utils.StreamToStringConverter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,8 @@ public class GetEntitiesRequest extends JsonRequest<List<Entity>> {
         try {
             try {
                 Gson gson = new Gson();
-                WSResponse response = gson.fromJson(networkResponse.data.toString(), WSResponse.class);
+                WSResponse response =
+                        gson.fromJson(StreamToStringConverter.convert(networkResponse.data), WSResponse.class);
 
                 List<Entity> entities = this.getModelInformationFromResponse(response);
 
