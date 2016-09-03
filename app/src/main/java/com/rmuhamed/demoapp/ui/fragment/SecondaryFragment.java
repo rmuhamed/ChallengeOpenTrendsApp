@@ -62,7 +62,7 @@ public class SecondaryFragment extends Fragment {
         this.gender.setText(anEntity.getGender());
         this.description.setText(anEntity.getDescription());
 
-        RemoteImageLoader loader = new RemoteImageLoader(this.getContext(), anEntity.getDescription());
+        RemoteImageLoader loader = new RemoteImageLoader(this.getContext(), anEntity.getPicture());
         loader.loadInto(this.mainPicture);
     }
 }

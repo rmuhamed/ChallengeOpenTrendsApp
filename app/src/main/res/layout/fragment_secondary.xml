@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -75,6 +76,9 @@
                         android:layout_marginLeft="@dimen/spacing_large"
                         android:layout_marginRight="@dimen/spacing_large"
                         android:layout_marginTop="@dimen/spacing_large"
+                        android:textColor="@android:color/black"
+                        android:textSize="18dp"
+                        tools:text="@string/dummy_large_text" />
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
                     <TextView
@@ -82,8 +86,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/spacing_large"
-                        tools:text="@string/dummy_large_text"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="18dp"
+                        tools:text="@string/dummy_large_text" />
 
                 </LinearLayout>
 
