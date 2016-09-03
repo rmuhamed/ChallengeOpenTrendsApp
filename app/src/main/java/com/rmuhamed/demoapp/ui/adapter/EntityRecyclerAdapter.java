@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 
 import com.rmuhamed.demoapp.R;
 import com.rmuhamed.demoapp.model.Entity;
+import com.rmuhamed.demoapp.ui.adapter.listener.EntitySelectedCallback;
+import com.rmuhamed.demoapp.ui.adapter.listener.ViewHolderClickCallback;
 import com.rmuhamed.demoapp.utils.RemoteImageLoader;
 
 import java.util.ArrayList;
@@ -16,20 +18,22 @@ import java.util.List;
 /**
  * Created by rmuhamed on jueves.
  */
-public class EntityRecyclerAdapter extends RecyclerView.Adapter<EntityViewHolder> {
+public class EntityRecyclerAdapter extends RecyclerView.Adapter<EntityViewHolder> implements ViewHolderClickCallback {
     private final Context context;
+    private final EntitySelectedCallback mainFragmentCallback;
     private List<Entity> items;
 
-    public EntityRecyclerAdapter(Context context){
+    public EntityRecyclerAdapter(EntitySelectedCallback mainFragmentCallback, Context context) {
         this.items = new ArrayList<>();
         this.context = context;
+        this.mainFragmentCallback = mainFragmentCallback;
     }
 
     @Override
     public EntityViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item, null);
 
-        return new EntityViewHolder(itemView);
+        return new EntityViewHolder(this, itemView);
     }
 
     @Override
@@ -53,5 +57,12 @@ public class EntityRecyclerAdapter extends RecyclerView.Adapter<EntityViewHolder
         this.items = entities;
         //FORCE redraw
         this.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onItemClicked(int position) {
+        Entity aSelectedEntity = this.items.get(position);
+
+        this.mainFragmentCallback.onEntitySelected(aSelectedEntity);
     }
 }

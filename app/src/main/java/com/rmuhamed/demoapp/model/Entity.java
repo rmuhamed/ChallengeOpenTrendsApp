@@ -1,11 +1,13 @@
 
 package com.rmuhamed.demoapp.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Entity {
-
+public class Entity implements Parcelable {
     @SerializedName("gender")
     @Expose
     private String gender;
@@ -18,9 +20,43 @@ public class Entity {
     @SerializedName("picture")
     @Expose
     private String picture;
-    @SerializedName("descritpion")
+    @SerializedName("description")
     @Expose
-    private String descritpion;
+    private String description;
+
+    protected Entity(Parcel in) {
+        this.gender = in.readString();
+        this.number = in.readString();
+        this.thumbnail = in.readString();
+        this.picture = in.readString();
+        this.description = in.readString();
+    }
+
+    public static final Creator<Entity> CREATOR = new Creator<Entity>() {
+        @Override
+        public Entity createFromParcel(Parcel in) {
+            return new Entity(in);
+        }
+
+        @Override
+        public Entity[] newArray(int size) {
+            return new Entity[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(this.gender);
+        parcel.writeString(this.number);
+        parcel.writeString(this.thumbnail);
+        parcel.writeString(this.picture);
+        parcel.writeString(this.description);
+    }
 
     /**
      * 
@@ -32,7 +68,7 @@ public class Entity {
     }
 
     /**
-     * 
+     *
      * @param gender
      *     The gender
      */
@@ -50,7 +86,7 @@ public class Entity {
     }
 
     /**
-     * 
+     *
      * @param number
      *     The number
      */
@@ -97,19 +133,18 @@ public class Entity {
     /**
      * 
      * @return
-     *     The descritpion
+     *     The description
      */
-    public String getDescritpion() {
-        return descritpion;
+    public String getDescription() {
+        return description;
     }
 
     /**
      * 
-     * @param descritpion
-     *     The descritpion
+     * @param description
+     *     The description
      */
-    public void setDescritpion(String descritpion) {
-        this.descritpion = descritpion;
+    public void setDescription(String description) {
+        this.description = description;
     }
-
 }

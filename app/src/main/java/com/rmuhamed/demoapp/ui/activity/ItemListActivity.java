@@ -1,14 +1,15 @@
 package com.rmuhamed.demoapp.ui.activity;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.rmuhamed.demoapp.R;
+import com.rmuhamed.demoapp.model.Entity;
 import com.rmuhamed.demoapp.ui.fragment.MainFragment;
+import com.rmuhamed.demoapp.ui.fragment.SecondaryFragment;
 
 public class ItemListActivity extends AppCompatActivity {
 
@@ -19,7 +20,7 @@ public class ItemListActivity extends AppCompatActivity {
 
         this.setupToolbar();
 
-        this.launchFragment(new MainFragment());
+        this.launchFragment(MainFragment.newInstance());
     }
 
     private void setupToolbar() {
@@ -32,5 +33,11 @@ public class ItemListActivity extends AppCompatActivity {
 
         fragmentTransaction.add(R.id.root_container, aFragment);
         fragmentTransaction.commit();
+    }
+
+    public void displayEntityDetailed(Entity entity) {
+        Fragment aFragment = SecondaryFragment.newInstance(entity);
+
+        this.launchFragment(aFragment);
     }
 }
