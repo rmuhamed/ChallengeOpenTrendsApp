@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.rmuhamed.demoapp.R;
 import com.rmuhamed.demoapp.api.request.GetEntitiesRequestCallback;
@@ -30,6 +31,9 @@ public class MainFragment extends Fragment implements GetEntitiesRequestCallback
 
     @BindView(R.id.recycler_list)
     RecyclerView anEntityRecyclerList;
+
+    @BindView(R.id.progress)
+    ProgressBar progress;
 
     public MainFragment() {}
 
@@ -71,6 +75,8 @@ public class MainFragment extends Fragment implements GetEntitiesRequestCallback
 
     @Override
     public void onSuccess(List<Entity> entities) {
+        this.updateRootViewStatus();
+
         this.anAdapter.fill(entities);
     }
 
@@ -82,5 +88,10 @@ public class MainFragment extends Fragment implements GetEntitiesRequestCallback
     @Override
     public void onEntitySelected(Entity entity) {
         ((ItemListActivity)this.getActivity()).displayEntityDetailed(entity);
+    }
+
+    private void updateRootViewStatus() {
+        this.progress.setVisibility(View.GONE);
+        this.anEntityRecyclerList.setVisibility(View.VISIBLE);
     }
 }

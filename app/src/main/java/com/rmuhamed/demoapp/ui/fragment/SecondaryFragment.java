@@ -13,6 +13,8 @@ import com.rmuhamed.demoapp.R;
 import com.rmuhamed.demoapp.model.Entity;
 import com.rmuhamed.demoapp.utils.RemoteImageLoader;
 
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -59,8 +61,8 @@ public class SecondaryFragment extends Fragment {
 
         assert anEntity != null;
 
-        this.gender.setText(anEntity.getGender());
-        this.description.setText(anEntity.getDescription());
+        this.gender.setText(String.format(Locale.getDefault(), this.getString(R.string.gender), anEntity.getGender()));
+        this.description.setText(String.format(Locale.getDefault(), this.getString(R.string.description), anEntity.getDescription()));
 
         RemoteImageLoader loader = new RemoteImageLoader(this.getContext(), anEntity.getPicture());
         loader.loadInto(this.mainPicture);
