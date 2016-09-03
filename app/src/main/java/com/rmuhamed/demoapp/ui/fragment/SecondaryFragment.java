@@ -6,9 +6,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.rmuhamed.demoapp.R;
 import com.rmuhamed.demoapp.model.Entity;
+import com.rmuhamed.demoapp.utils.RemoteImageLoader;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by rmuhamed on martes.
@@ -16,6 +22,15 @@ import com.rmuhamed.demoapp.model.Entity;
 public class SecondaryFragment extends Fragment {
 
     public static final String ENTITY = "ENTITY";
+
+    @BindView(R.id.main_picture)
+    ImageView mainPicture;
+
+    @BindView(R.id.description)
+    TextView description;
+
+    @BindView(R.id.gender)
+    TextView gender;
 
     public SecondaryFragment() {}
 
@@ -31,11 +46,23 @@ public class SecondaryFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_secondary, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_secondary, container, false);
+
+        ButterKnife.bind(this, rootView);
+
+        return rootView;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        Entity anEntity = this.getArguments().getParcelable(ENTITY);
+
+        assert anEntity != null;
+
+        this.gender.setText(anEntity.getGender());
+        this.description.setText(anEntity.getDescription());
+
+        RemoteImageLoader loader = new RemoteImageLoader(this.getContext(), anEntity.getDescription());
+        loader.loadInto(this.mainPicture);
     }
 }

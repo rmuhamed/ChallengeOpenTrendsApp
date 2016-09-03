@@ -42,22 +42,31 @@ public class MainFragment extends Fragment implements GetEntitiesRequestCallback
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        //Retrieve data from WS
+        RestAPI aRestAPI = new RestAPI(this.getContext());
+        aRestAPI.getEntities(this);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         ButterKnife.bind(this, this.rootView);
 
-        this.setupRecyclerList();
-
         return this.rootView;
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        LinearLayoutManager aLayoutManager =
+                new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
 
-        RestAPI aRestAPI = new RestAPI(this.getContext());
-        aRestAPI.getEntities(this);
+        this.anAdapter = new EntityRecyclerAdapter(this, this.getContext());
+
+        this.anEntityRecyclerList.setLayoutManager(aLayoutManager);
+        this.anEntityRecyclerList.setAdapter(this.anAdapter);
     }
 
     @Override
@@ -68,15 +77,6 @@ public class MainFragment extends Fragment implements GetEntitiesRequestCallback
     @Override
     public void onError(String errorMessage) {
         Snackbar.make(this.rootView, errorMessage, Snackbar.LENGTH_LONG).show();
-    }
-
-    private void setupRecyclerList() {
-        LinearLayoutManager aLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
-
-        this.anAdapter = new EntityRecyclerAdapter(this, this.getContext());
-
-        this.anEntityRecyclerList.setLayoutManager(aLayoutManager);
-        this.anEntityRecyclerList.setAdapter(this.anAdapter);
     }
 
     @Override
