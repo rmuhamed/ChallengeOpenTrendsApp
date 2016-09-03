@@ -20,7 +20,7 @@ public class Entity implements Parcelable {
     @SerializedName("picture")
     @Expose
     private String picture;
-    @SerializedName("description")
+    @SerializedName("descritpion")
     @Expose
     private String description;
 
