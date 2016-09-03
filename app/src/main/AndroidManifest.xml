@@ -13,6 +13,7 @@
         <activity
             android:name=".ui.activity.SplashActivity"
             android:label="@string/activity_splash_title"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +25,7 @@
         <activity
             android:name=".ui.activity.ItemListActivity"
             android:label="@string/activity_item_list_main_fragment_title"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
