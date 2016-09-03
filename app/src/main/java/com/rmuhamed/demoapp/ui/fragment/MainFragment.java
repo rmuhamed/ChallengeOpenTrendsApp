@@ -81,7 +81,14 @@ public class MainFragment extends Fragment implements GetEntitiesRequestCallback
     public void onSuccess(List<Entity> entities) {
         this.updateRootViewStatus();
 
+        this.anAdapter.clear();
+
         this.anAdapter.fill(entities);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override

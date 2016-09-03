@@ -67,4 +67,10 @@ public class EntityRecyclerAdapter extends RecyclerView.Adapter<EntityViewHolder
 
         this.mainFragmentCallback.onEntitySelected(aSelectedEntity);
     }
+
+    public void clear() {
+        if (this.items != null && !this.items.isEmpty()) {
+            this.items.clear();
+        }
+    }
 }
