@@ -93,6 +93,8 @@ public class MainFragment extends Fragment implements GetEntitiesRequestCallback
 
     @Override
     public void onError(String errorMessage) {
+        this.progress.setVisibility(View.GONE);
+
         Snackbar.make(this.rootView, errorMessage, Snackbar.LENGTH_LONG).show();
     }
 
