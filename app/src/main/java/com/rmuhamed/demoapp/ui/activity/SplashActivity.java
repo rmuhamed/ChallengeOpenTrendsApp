@@ -20,14 +20,10 @@ public class SplashActivity extends AppCompatActivity {
     private void runSplash() {
         new CountDownTimer(2000, 1000) {
             @Override
-            public void onTick(long l) {
-
-            }
+            public void onTick(long l) {}
 
             @Override
-            public void onFinish() {
-                launchNextActivity();
-            }
+            public void onFinish() { SplashActivity.this.launchNextActivity();}
         }.start();
     }
 

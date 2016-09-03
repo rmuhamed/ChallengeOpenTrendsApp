@@ -19,6 +19,8 @@ import java.util.List;
  * Created by rmuhamed on jueves.
  */
 public class EntityRecyclerAdapter extends RecyclerView.Adapter<EntityViewHolder> implements ViewHolderClickCallback {
+    private static final String DUMMY_LABEL_FOR_RECYCLER_ITEM = "Some info for ITEM";
+
     private final Context context;
     private final EntitySelectedCallback mainFragmentCallback;
     private List<Entity> items;
@@ -42,7 +44,7 @@ public class EntityRecyclerAdapter extends RecyclerView.Adapter<EntityViewHolder
 
         assert anEntityForPosition != null;
 
-        holder.label.setText(anEntityForPosition.getGender() != null ? anEntityForPosition.getGender() : "Some info for ITEM");
+        holder.label.setText(anEntityForPosition.getGender() != null ? anEntityForPosition.getGender() : DUMMY_LABEL_FOR_RECYCLER_ITEM);
 
         RemoteImageLoader remoteImageLoader = new RemoteImageLoader(this.context, anEntityForPosition.getThumbnail());
         remoteImageLoader.loadInto(holder.picture);
