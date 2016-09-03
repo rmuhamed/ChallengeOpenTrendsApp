@@ -31,21 +31,17 @@ public class ItemListActivity extends AppCompatActivity {
     private void launchFragment(Fragment aFragment) {
         FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
 
-        fragmentTransaction.add(R.id.root_container, aFragment);
+        fragmentTransaction.add(R.id.fragment_container, aFragment);
         fragmentTransaction.commit();
     }
 
     public void displayEntityDetailed(Entity entity) {
         Fragment aFragment = SecondaryFragment.newInstance(entity);
 
+        FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-// Replace whatever is in the fragment_container view with this fragment,
-// and add the transaction to the back stack so the user can navigate back
-        transaction.replace(R.id.root_container, aFragment);
+        transaction.replace(R.id.fragment_container, aFragment);
         transaction.addToBackStack(null);
-
-        this.launchFragment(aFragment);
+        transaction.commit();
     }
 }
