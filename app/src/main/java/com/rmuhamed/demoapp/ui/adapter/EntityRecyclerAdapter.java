@@ -10,7 +10,7 @@ import com.rmuhamed.demoapp.R;
 import com.rmuhamed.demoapp.model.Entity;
 import com.rmuhamed.demoapp.ui.adapter.listener.EntitySelectedCallback;
 import com.rmuhamed.demoapp.ui.adapter.listener.ViewHolderClickCallback;
-import com.rmuhamed.demoapp.utils.RemoteImageLoader;
+import com.rmuhamed.demoapp.utils.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +46,8 @@ public class EntityRecyclerAdapter extends RecyclerView.Adapter<EntityViewHolder
 
         holder.label.setText(anEntityForPosition.getGender() != null ? anEntityForPosition.getGender() : DUMMY_LABEL_FOR_RECYCLER_ITEM);
 
-        RemoteImageLoader remoteImageLoader = new RemoteImageLoader(this.context, anEntityForPosition.getThumbnail());
-        remoteImageLoader.loadInto(holder.picture);
+        ImageLoader remoteImageLoader = new ImageLoader(this.context);
+        remoteImageLoader.loadFromUrl(anEntityForPosition.getThumbnail(), holder.picture);
     }
 
     @Override

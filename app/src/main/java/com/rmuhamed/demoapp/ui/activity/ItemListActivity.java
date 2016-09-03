@@ -8,47 +8,58 @@ import android.support.v7.widget.Toolbar;
 
 import com.rmuhamed.demoapp.R;
 import com.rmuhamed.demoapp.model.Entity;
+import com.rmuhamed.demoapp.ui.activity.listener.FragmentCallback;
 import com.rmuhamed.demoapp.ui.fragment.MainFragment;
 import com.rmuhamed.demoapp.ui.fragment.SecondaryFragment;
 
-public class ItemListActivity extends AppCompatActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class ItemListActivity extends AppCompatActivity implements FragmentCallback {
+    private static final String ONLY_PUSH_MODE = "ONLY_PUSH_MODE";
+    private static final String REPLACE_MODE = "REPLACE_MODE";
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_item_list);
 
+        ButterKnife.bind(this);
+
         this.setupToolbar();
 
-        this.launchFragment(MainFragment.newInstance());
+        MainFragment mainFragment = MainFragment.newInstance();
+        mainFragment.setFragmentCallback(this);
+
+        this.launchFragment(mainFragment, ONLY_PUSH_MODE);
+    }
+
+    public void onEntityShouldBeShowInDetailedMode(Entity entity) {
+        //UPDATE TITLE FOR TOOLBAR
+        this.toolbar.setTitle(R.string.activity_item_list_second_fragment_title);
+
+        this.launchFragment(SecondaryFragment.newInstance(entity), REPLACE_MODE);
     }
 
     private void setupToolbar() {
-        Toolbar toolbar = (Toolbar) this.findViewById(R.id.toolbar);
-        this.setSupportActionBar(toolbar);
+        this.toolbar = (Toolbar) this.findViewById(R.id.toolbar);
+        this.toolbar.setTitle(R.string.activity_item_list_main_fragment_title);
+        this.setSupportActionBar(this.toolbar);
     }
 
-    private void launchFragment(Fragment aFragment) {
+    private void launchFragment(Fragment aFragment, String mode) {
         FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
 
-        fragmentTransaction.add(R.id.fragment_container, aFragment);
+        if (mode.equals(ONLY_PUSH_MODE)) {
+            fragmentTransaction.add(R.id.fragment_container, aFragment);
+        } else {
+            fragmentTransaction.replace(R.id.fragment_container, aFragment);
+            fragmentTransaction.addToBackStack(null);
+        }
+
         fragmentTransaction.commit();
-    }
-
-    public void displayEntityDetailed(Entity entity) {
-        Fragment aFragment = SecondaryFragment.newInstance(entity);
-
-        FragmentTransaction transaction = this.getSupportFragmentManager().beginTransaction();
-
-        transaction.replace(R.id.fragment_container, aFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
-    @Override
-    protected void onDestroy() {
-        this.getSupportFragmentManager().popBackStack();
-
-        super.onDestroy();
     }
 }

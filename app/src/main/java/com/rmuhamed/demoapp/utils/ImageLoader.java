@@ -1,33 +1,42 @@
 package com.rmuhamed.demoapp.utils;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableResource;
 import com.rmuhamed.demoapp.R;
 
 /**
  * Created by rmuhamed on jueves.
  */
-public class RemoteImageLoader {
+public class ImageLoader {
 
     private final Context context;
-    private final String remoteUrl;
     private int placeHolderResId;
 
-    public RemoteImageLoader(Context context, String remoteUrl) {
-        this.remoteUrl = remoteUrl;
+    public ImageLoader(Context context) {
         this.context = context;
         this.placeHolderResId = R.mipmap.ic_launcher;
     }
 
-    public void loadInto(ImageView imageView) {
+    public void loadFromUrl(String url, ImageView iv) {
         Glide.with(this.context)
-                .load(this.remoteUrl)
+                .load(url)
                 .asBitmap()
                 .placeholder(this.placeHolderResId)
                 .centerCrop()
-                .into(imageView);
+                .into(iv);
+    }
+
+    public void loadFromResource(int resourceId, ImageView iv) {
+        Glide.with(this.context)
+                .load(resourceId)
+                .asBitmap()
+                .placeholder(this.placeHolderResId)
+                .centerCrop()
+                .into(iv);
     }
 
     public void setPlaceHolder(int placeHolderResourceId) {

@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.rmuhamed.demoapp.R;
 import com.rmuhamed.demoapp.model.Entity;
-import com.rmuhamed.demoapp.utils.RemoteImageLoader;
+import com.rmuhamed.demoapp.utils.ImageLoader;
 
 import java.util.Locale;
 
@@ -64,7 +64,7 @@ public class SecondaryFragment extends Fragment {
         this.gender.setText(String.format(Locale.getDefault(), this.getString(R.string.gender), anEntity.getGender()));
         this.description.setText(String.format(Locale.getDefault(), this.getString(R.string.description), anEntity.getDescription()));
 
-        RemoteImageLoader loader = new RemoteImageLoader(this.getContext(), anEntity.getPicture());
-        loader.loadInto(this.mainPicture);
+        ImageLoader loader = new ImageLoader(this.getContext());
+        loader.loadFromUrl(anEntity.getPicture(), this.mainPicture);
     }
 }

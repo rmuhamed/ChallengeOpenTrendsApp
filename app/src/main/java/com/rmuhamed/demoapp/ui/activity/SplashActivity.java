@@ -4,15 +4,28 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import com.rmuhamed.demoapp.R;
+import com.rmuhamed.demoapp.utils.ImageLoader;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class SplashActivity extends AppCompatActivity {
+
+    @BindView(R.id.splash_picture)
+    ImageView splashPicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_splash);
+
+        ButterKnife.bind(this);
+
+        ImageLoader imLoader = new ImageLoader(this);
+        imLoader.loadFromResource(R.drawable.splash, this.splashPicture);
 
         this.runSplash();
     }

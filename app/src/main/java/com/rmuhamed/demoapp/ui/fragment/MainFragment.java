@@ -16,6 +16,7 @@ import com.rmuhamed.demoapp.api.request.GetEntitiesRequestCallback;
 import com.rmuhamed.demoapp.api.RestAPI;
 import com.rmuhamed.demoapp.model.Entity;
 import com.rmuhamed.demoapp.ui.activity.ItemListActivity;
+import com.rmuhamed.demoapp.ui.activity.listener.FragmentCallback;
 import com.rmuhamed.demoapp.ui.adapter.EntityRecyclerAdapter;
 import com.rmuhamed.demoapp.ui.adapter.listener.EntitySelectedCallback;
 
@@ -26,6 +27,7 @@ import butterknife.ButterKnife;
 
 public class MainFragment extends Fragment implements GetEntitiesRequestCallback, EntitySelectedCallback {
     private EntityRecyclerAdapter anAdapter;
+    private FragmentCallback activityCallback;
 
     private View rootView;
 
@@ -41,7 +43,9 @@ public class MainFragment extends Fragment implements GetEntitiesRequestCallback
         Bundle args = new Bundle();
 
         MainFragment fragment = new MainFragment();
+
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -87,8 +91,17 @@ public class MainFragment extends Fragment implements GetEntitiesRequestCallback
 
     @Override
     public void onEntitySelected(Entity entity) {
-        ((ItemListActivity)this.getActivity()).displayEntityDetailed(entity);
+        this.activityCallback.onEntityShouldBeShowInDetailedMode(entity);
     }
+
+    /**
+     * To handle message collaborations between activity & fragment
+     * @param activityCallback
+     */
+    public void setFragmentCallback(FragmentCallback activityCallback) {
+        this.activityCallback = activityCallback;
+    }
+
 
     private void updateRootViewStatus() {
         this.progress.setVisibility(View.GONE);
