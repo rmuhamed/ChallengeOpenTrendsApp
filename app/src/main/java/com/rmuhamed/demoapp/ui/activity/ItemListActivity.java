@@ -1,21 +1,22 @@
 package com.rmuhamed.demoapp.ui.activity;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.rmuhamed.demoapp.R;
 import com.rmuhamed.demoapp.model.Entity;
-import com.rmuhamed.demoapp.ui.activity.listener.FragmentCallback;
+import com.rmuhamed.demoapp.ui.activity.listener.FragmentLifecycleCallback;
+import com.rmuhamed.demoapp.ui.activity.listener.MainFragmentCallback;
 import com.rmuhamed.demoapp.ui.fragment.MainFragment;
 import com.rmuhamed.demoapp.ui.fragment.SecondaryFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ItemListActivity extends AppCompatActivity implements FragmentCallback {
+public class ItemListActivity extends AppCompatActivity implements MainFragmentCallback, FragmentLifecycleCallback {
     private static final String ONLY_PUSH_MODE = "ONLY_PUSH_MODE";
     private static final String REPLACE_MODE = "REPLACE_MODE";
 
@@ -37,11 +38,17 @@ public class ItemListActivity extends AppCompatActivity implements FragmentCallb
         this.launchFragment(mainFragment, ONLY_PUSH_MODE);
     }
 
-    public void onEntityShouldBeShowInDetailedMode(Entity entity) {
+    @Override
+    public void onToolbarShouldBeUpdate(String toolbarTitle) {
         //UPDATE TITLE FOR TOOLBAR
-        this.toolbar.setTitle(R.string.activity_item_list_second_fragment_title);
+        this.toolbar.setTitle(toolbarTitle);
+    }
 
-        this.launchFragment(SecondaryFragment.newInstance(entity), REPLACE_MODE);
+    @Override
+    public void onEntityShouldBeShowInDetailedMode(Entity entity) {
+        SecondaryFragment fragment = SecondaryFragment.newInstance(entity);
+        fragment.setFragmentCallback(this);
+        this.launchFragment(fragment, REPLACE_MODE);
     }
 
     private void setupToolbar() {

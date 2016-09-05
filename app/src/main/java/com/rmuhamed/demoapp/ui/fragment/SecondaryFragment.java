@@ -2,7 +2,6 @@ package com.rmuhamed.demoapp.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 
 import com.rmuhamed.demoapp.R;
 import com.rmuhamed.demoapp.model.Entity;
+import com.rmuhamed.demoapp.ui.activity.listener.FragmentLifecycleCallback;
 import com.rmuhamed.demoapp.utils.ImageLoader;
 
 import java.util.Locale;
@@ -18,12 +18,10 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by rmuhamed on martes.
- */
-public class SecondaryFragment extends Fragment {
-
+public class SecondaryFragment extends BaseFragment<FragmentLifecycleCallback> {
     public static final String ENTITY = "ENTITY";
+
+    private FragmentLifecycleCallback activityCallback;
 
     @BindView(R.id.main_picture)
     ImageView mainPicture;
@@ -36,8 +34,7 @@ public class SecondaryFragment extends Fragment {
 
     public SecondaryFragment() {}
 
-    public static Fragment newInstance(Entity entity) {
-
+    public static SecondaryFragment newInstance(Entity entity) {
         Bundle args = new Bundle();
         args.putParcelable(ENTITY, entity);
 
@@ -66,5 +63,21 @@ public class SecondaryFragment extends Fragment {
 
         ImageLoader loader = new ImageLoader(this.getContext());
         loader.loadFromUrl(anEntity.getPicture(), this.mainPicture);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        this.activityCallback.onToolbarShouldBeUpdate(this.getString(R.string.activity_item_list_main_fragment_title));
+    }
+
+    /**
+     * To handle message collaborations between activity & fragment
+     * @param activityCallback
+     */
+    @Override
+    public void setFragmentCallback(FragmentLifecycleCallback activityCallback) {
+        this.activityCallback = activityCallback;
     }
 }

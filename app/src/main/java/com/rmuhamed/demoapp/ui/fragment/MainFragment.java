@@ -1,9 +1,8 @@
 package com.rmuhamed.demoapp.ui.fragment;
 
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,11 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.rmuhamed.demoapp.R;
-import com.rmuhamed.demoapp.api.request.GetEntitiesRequestCallback;
 import com.rmuhamed.demoapp.api.RestAPI;
+import com.rmuhamed.demoapp.api.request.GetEntitiesRequestCallback;
 import com.rmuhamed.demoapp.model.Entity;
-import com.rmuhamed.demoapp.ui.activity.ItemListActivity;
-import com.rmuhamed.demoapp.ui.activity.listener.FragmentCallback;
+import com.rmuhamed.demoapp.ui.activity.listener.MainFragmentCallback;
 import com.rmuhamed.demoapp.ui.adapter.EntityRecyclerAdapter;
 import com.rmuhamed.demoapp.ui.adapter.listener.EntitySelectedCallback;
 
@@ -25,9 +23,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainFragment extends Fragment implements GetEntitiesRequestCallback, EntitySelectedCallback {
+public class MainFragment extends BaseFragment<MainFragmentCallback> implements GetEntitiesRequestCallback, EntitySelectedCallback {
     private EntityRecyclerAdapter anAdapter;
-    private FragmentCallback activityCallback;
+    private MainFragmentCallback activityCallback;
 
     private View rootView;
 
@@ -89,6 +87,8 @@ public class MainFragment extends Fragment implements GetEntitiesRequestCallback
     @Override
     public void onResume() {
         super.onResume();
+        //INFORM TOOLBAR TITLE
+        this.activityCallback.onToolbarShouldBeUpdate(this.getString(R.string.activity_item_list_main_fragment_title));
     }
 
     @Override
@@ -107,10 +107,10 @@ public class MainFragment extends Fragment implements GetEntitiesRequestCallback
      * To handle message collaborations between activity & fragment
      * @param activityCallback
      */
-    public void setFragmentCallback(FragmentCallback activityCallback) {
+    @Override
+    public void setFragmentCallback(MainFragmentCallback activityCallback) {
         this.activityCallback = activityCallback;
     }
-
 
     private void updateRootViewStatus() {
         this.progress.setVisibility(View.GONE);
