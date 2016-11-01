@@ -22,13 +22,13 @@ public class EntityRecyclerAdapter extends RecyclerView.Adapter<EntityViewHolder
     private static final String DUMMY_LABEL_FOR_RECYCLER_ITEM = "Some info for ITEM";
 
     private final Context context;
-    private final EntitySelectedCallback mainFragmentCallback;
+    private final EntitySelectedCallback entitySelectedCallback;
     private List<Entity> items;
 
     public EntityRecyclerAdapter(EntitySelectedCallback mainFragmentCallback, Context context) {
         this.items = new ArrayList<>();
         this.context = context;
-        this.mainFragmentCallback = mainFragmentCallback;
+        this.entitySelectedCallback = mainFragmentCallback;
     }
 
     @Override
@@ -65,7 +65,7 @@ public class EntityRecyclerAdapter extends RecyclerView.Adapter<EntityViewHolder
     public void onItemClicked(int position) {
         Entity aSelectedEntity = this.items.get(position);
 
-        this.mainFragmentCallback.onEntitySelected(aSelectedEntity);
+        this.entitySelectedCallback.onEntitySelected(aSelectedEntity);
     }
 
     public void clear() {

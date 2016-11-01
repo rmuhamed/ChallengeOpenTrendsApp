@@ -18,10 +18,21 @@ import java.util.List;
 public class RestAPI implements IRestAPI {
 
     private static final String GET_URL = "https://randomapi.com/api/?key=LMW0-SW97-ISC4-FF25&id=t60ldyb&results=20";
-    private final Context context;
+    private static RestAPI instance;
+    private RequestQueue requestQueue;
 
-    public RestAPI(Context context) {
-        this.context = context;
+    public static RestAPI getInstance() {
+        if (instance == null) {
+            instance = new RestAPI();
+        }
+
+        return instance;
+    }
+
+    public RestAPI initialize(Context context) {
+        this.requestQueue = Volley.newRequestQueue(context.getApplicationContext());
+
+        return this;
     }
 
     public void getEntities(final GetEntitiesRequestCallback listener) {
@@ -41,8 +52,7 @@ public class RestAPI implements IRestAPI {
 
         jsonRequest.setShouldCache(true);
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this.context.getApplicationContext());
-        requestQueue.add(jsonRequest);
+        this.requestQueue.add(jsonRequest);
     }
 
 }

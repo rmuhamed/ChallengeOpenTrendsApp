@@ -51,8 +51,7 @@ public class MainFragment extends BaseFragment<MainFragmentCallback> implements 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //Retrieve data from WS
-        RestAPI aRestAPI = new RestAPI(this.getContext());
-        aRestAPI.getEntities(this);
+        RestAPI.getInstance().initialize(this.getContext()).getEntities(this);
     }
 
     @Override
@@ -87,8 +86,11 @@ public class MainFragment extends BaseFragment<MainFragmentCallback> implements 
     @Override
     public void onResume() {
         super.onResume();
-        //INFORM TOOLBAR TITLE
-        this.activityCallback.onToolbarShouldBeUpdate(this.getString(R.string.activity_item_list_main_fragment_title));
+
+        //TODO: RM - Review this
+        if (this.activityCallback != null) {
+            this.activityCallback.onToolbarShouldBeUpdate(this.getString(R.string.activity_item_list_main_fragment_title));
+        }
     }
 
     @Override
@@ -100,7 +102,7 @@ public class MainFragment extends BaseFragment<MainFragmentCallback> implements 
 
     @Override
     public void onEntitySelected(Entity entity) {
-        this.activityCallback.onEntityShouldBeShowInDetailedMode(entity);
+        this.activityCallback.onEntityShouldBeShownInDetailedMode(entity);
     }
 
     /**

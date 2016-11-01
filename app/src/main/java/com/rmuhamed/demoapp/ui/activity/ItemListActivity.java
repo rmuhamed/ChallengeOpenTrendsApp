@@ -45,7 +45,7 @@ public class ItemListActivity extends AppCompatActivity implements MainFragmentC
     }
 
     @Override
-    public void onEntityShouldBeShowInDetailedMode(Entity entity) {
+    public void onEntityShouldBeShownInDetailedMode(Entity entity) {
         SecondaryFragment fragment = SecondaryFragment.newInstance(entity);
         fragment.setFragmentCallback(this);
         this.launchFragment(fragment, REPLACE_MODE);
@@ -59,6 +59,8 @@ public class ItemListActivity extends AppCompatActivity implements MainFragmentC
 
     private void launchFragment(Fragment aFragment, String mode) {
         FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+
 
         if (mode.equals(ONLY_PUSH_MODE)) {
             fragmentTransaction.add(R.id.fragment_container, aFragment);
