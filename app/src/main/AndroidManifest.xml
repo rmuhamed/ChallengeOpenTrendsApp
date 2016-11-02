@@ -27,6 +27,11 @@
             android:label="@string/activity_item_list_main_fragment_title"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="266e33423364ba974a9e40862260c683112d817c"
+            />
     </application>
 
 </manifest>

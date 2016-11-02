@@ -44,10 +44,13 @@ public class EntityRecyclerAdapter extends RecyclerView.Adapter<EntityViewHolder
 
         assert anEntityForPosition != null;
 
-        holder.label.setText(anEntityForPosition.getGender() != null ? anEntityForPosition.getGender() : DUMMY_LABEL_FOR_RECYCLER_ITEM);
+        holder.label.setText(anEntityForPosition.getGender() != null
+                ? anEntityForPosition.getGender()
+                : DUMMY_LABEL_FOR_RECYCLER_ITEM);
 
-        ImageLoader remoteImageLoader = new ImageLoader(this.context);
-        remoteImageLoader.loadFromUrl(anEntityForPosition.getThumbnail(), holder.picture);
+        ImageLoader.getInstance()
+                .with(this.context)
+                .loadFromUrl(anEntityForPosition.getThumbnail(), holder.picture);
     }
 
     @Override

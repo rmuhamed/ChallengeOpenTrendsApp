@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.crashlytics.android.Crashlytics;
 import com.rmuhamed.demoapp.R;
 import com.rmuhamed.demoapp.api.RestAPI;
 import com.rmuhamed.demoapp.api.request.GetEntitiesRequestCallback;
@@ -89,7 +90,9 @@ public class MainFragment extends BaseFragment<MainFragmentCallback> implements 
 
         //TODO: RM - Review this
         if (this.activityCallback != null) {
-            this.activityCallback.onToolbarShouldBeUpdate(this.getString(R.string.activity_item_list_main_fragment_title));
+            this.activityCallback.onToolbarTitleShouldBeUpdated(this.getString(R.string.activity_item_list_main_fragment_title));
+        } else {
+            Crashlytics.log("ActivityCallback not set");
         }
     }
 

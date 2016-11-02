@@ -61,15 +61,16 @@ public class SecondaryFragment extends BaseFragment<FragmentLifecycleCallback> {
         this.gender.setText(String.format(Locale.getDefault(), this.getString(R.string.gender), anEntity.getGender()));
         this.description.setText(String.format(Locale.getDefault(), this.getString(R.string.description), anEntity.getDescription()));
 
-        ImageLoader loader = new ImageLoader(this.getContext());
-        loader.loadFromUrl(anEntity.getPicture(), this.mainPicture);
+        ImageLoader.getInstance()
+                .with(this.getContext())
+                .loadFromUrl(anEntity.getPicture(), this.mainPicture);
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        this.activityCallback.onToolbarShouldBeUpdate(this.getString(R.string.activity_item_list_main_fragment_title));
+        this.activityCallback.onToolbarTitleShouldBeUpdated(this.getString(R.string.activity_item_list_main_fragment_title));
     }
 
     /**

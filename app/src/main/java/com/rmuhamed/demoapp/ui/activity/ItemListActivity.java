@@ -39,7 +39,7 @@ public class ItemListActivity extends AppCompatActivity implements MainFragmentC
     }
 
     @Override
-    public void onToolbarShouldBeUpdate(String toolbarTitle) {
+    public void onToolbarTitleShouldBeUpdated(String toolbarTitle) {
         //UPDATE TITLE FOR TOOLBAR
         this.toolbar.setTitle(toolbarTitle);
     }
@@ -60,7 +60,6 @@ public class ItemListActivity extends AppCompatActivity implements MainFragmentC
     private void launchFragment(Fragment aFragment, String mode) {
         FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
-
 
         if (mode.equals(ONLY_PUSH_MODE)) {
             fragmentTransaction.add(R.id.fragment_container, aFragment);

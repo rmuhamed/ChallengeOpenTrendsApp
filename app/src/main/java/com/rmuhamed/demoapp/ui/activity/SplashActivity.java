@@ -6,13 +6,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.crashlytics.android.Crashlytics;
 import com.rmuhamed.demoapp.R;
 import com.rmuhamed.demoapp.utils.ImageLoader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.fabric.sdk.android.Fabric;
 
 public class SplashActivity extends AppCompatActivity {
+    public static final int SPLASH_DURATION = 3000;
 
     @BindView(R.id.splash_picture)
     ImageView splashPicture;
@@ -22,16 +25,21 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_splash);
 
+        //Fabric initialization
+        Fabric.with(this, new Crashlytics());
+        //ButterKnife initialization
         ButterKnife.bind(this);
 
-        ImageLoader imLoader = new ImageLoader(this);
-        imLoader.loadFromResource(R.drawable.splash, this.splashPicture);
-
-        this.runSplash();
+        this.loadImageForSplash();
+        this.performSplash(SPLASH_DURATION);
     }
 
-    private void runSplash() {
-        new CountDownTimer(2000, 1000) {
+    private void loadImageForSplash() {
+        ImageLoader.getInstance().with(this).loadFromResource(R.drawable.splash, this.splashPicture);
+    }
+
+    private void performSplash(int splashDuration) {
+        new CountDownTimer(splashDuration, 1000) {
             @Override
             public void onTick(long l) {}
 

@@ -12,13 +12,25 @@ import com.rmuhamed.demoapp.R;
  * Created by rmuhamed on jueves.
  */
 public class ImageLoader {
-
-    private final Context context;
+    private Context context;
     private int placeHolderResId;
 
-    public ImageLoader(Context context) {
-        this.context = context;
+    private ImageLoader() {
         this.placeHolderResId = R.mipmap.ic_launcher;
+    }
+
+    public void placeHolder(int placeHolderResourceId) {
+        this.placeHolderResId = placeHolderResourceId;
+    }
+
+    public static ImageLoader getInstance() {
+        return new ImageLoader();
+    }
+
+    public ImageLoader with(Context context) {
+        this.context = context;
+
+        return this;
     }
 
     public void loadFromUrl(String url, ImageView iv) {
@@ -37,9 +49,5 @@ public class ImageLoader {
                 .placeholder(this.placeHolderResId)
                 .centerCrop()
                 .into(iv);
-    }
-
-    public void setPlaceHolder(int placeHolderResourceId) {
-        this.placeHolderResId = placeHolderResourceId;
     }
 }
