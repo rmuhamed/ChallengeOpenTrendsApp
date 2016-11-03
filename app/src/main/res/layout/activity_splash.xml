@@ -13,6 +13,17 @@
         android:id="@+id/splash_picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/remaining_time_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/splash_picture"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/dummy_remaining_time_to_start_demo"
+        android:textColor="@android:color/black"
+        android:textSize="28sp" />
 
 </RelativeLayout>

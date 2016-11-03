@@ -10,4 +10,5 @@
 
     <string name="gender">Gender: %s</string>
     <string name="description">A Brief description: \n \n %s</string>
+    <string name="dummy_remaining_time_to_start_demo">5 sec</string>
 </resources>
