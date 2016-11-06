@@ -53,7 +53,6 @@ public class ItemListActivity extends AppCompatActivity implements MainFragmentC
 
     private void setupToolbar() {
         this.toolbar = (Toolbar) this.findViewById(R.id.toolbar);
-        this.toolbar.setTitle(R.string.activity_item_list_main_fragment_title);
         this.setSupportActionBar(this.toolbar);
     }
 
