@@ -2,10 +2,10 @@ package com.rmuhamed.demoapp.api;
 
 import android.content.Context;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
+import com.rmuhamed.demoapp.BuildConfig;
+import com.rmuhamed.demoapp.api.queue.SingletonRequestQueue;
 import com.rmuhamed.demoapp.api.request.GetEntitiesRequest;
 import com.rmuhamed.demoapp.api.request.GetEntitiesRequestCallback;
 import com.rmuhamed.demoapp.model.User;
@@ -16,9 +16,12 @@ import java.util.List;
  * Created by rmuhamed on miércoles.
  */
 public class RestAPI implements IRestAPI {
-    private static final String GET_URL = "https://randomapi.com/api/qcum046q?key=VV8U-IIHJ-LJGC-A7QK";
+    private static final String GET_URL = BuildConfig.SERVER_URL;
+
     private static RestAPI instance;
-    private RequestQueue requestQueue;
+    private SingletonRequestQueue requestQueue;
+
+    private RestAPI() {}
 
     public static RestAPI getInstance() {
         if (instance == null) {
@@ -29,7 +32,7 @@ public class RestAPI implements IRestAPI {
     }
 
     public RestAPI initialize(Context context) {
-        this.requestQueue = Volley.newRequestQueue(context.getApplicationContext());
+        this.requestQueue = SingletonRequestQueue.getInstance(context.getApplicationContext());
 
         return this;
     }
@@ -51,7 +54,6 @@ public class RestAPI implements IRestAPI {
 
         jsonRequest.setShouldCache(true);
 
-        this.requestQueue.add(jsonRequest);
+        this.requestQueue.addToRequestQueue(jsonRequest);
     }
-
 }

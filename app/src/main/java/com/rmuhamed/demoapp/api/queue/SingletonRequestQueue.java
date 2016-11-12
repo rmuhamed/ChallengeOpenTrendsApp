@@ -7,14 +7,11 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
 public class SingletonRequestQueue {
-    private static final String LOG_TAG = SingletonRequestQueue.class.getSimpleName();
     private static SingletonRequestQueue instance;
     private RequestQueue requestQueue;
-    private static Context context;
 
-    private SingletonRequestQueue(Context context) {
-        SingletonRequestQueue.context = context;
-        this.requestQueue = this.getRequestQueue();
+    private SingletonRequestQueue(Context applicationContext) {
+        this.requestQueue = this.getRequestQueue(applicationContext);
     }
 
     public static synchronized SingletonRequestQueue getInstance(Context context) {
@@ -24,23 +21,23 @@ public class SingletonRequestQueue {
         return instance;
     }
 
-    public RequestQueue getRequestQueue() {
-        if (requestQueue == null) {
-            requestQueue = Volley.newRequestQueue(context.getApplicationContext());
-        }
-        return requestQueue;
-    }
-
     public <T> void addToRequestQueue(Request<T> req) {
-        this.getRequestQueue().add(req);
+        this.requestQueue.add(req);
     }
 
     public void cancelAllRequests() {
-        this.getRequestQueue().cancelAll(new RequestQueue.RequestFilter() {
+        this.requestQueue.cancelAll(new RequestQueue.RequestFilter() {
             @Override
             public boolean apply(Request<?> request) {
                 return true;
             }
         });
+    }
+
+    private RequestQueue getRequestQueue(Context applicationContext) {
+        if (this.requestQueue == null) {
+            this.requestQueue = Volley.newRequestQueue(applicationContext);
+        }
+        return this.requestQueue;
     }
 }
