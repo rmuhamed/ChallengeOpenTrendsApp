@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rmuhamed.demoapp.R;
-import com.rmuhamed.demoapp.model.Entity;
+import com.rmuhamed.demoapp.model.User;
 import com.rmuhamed.demoapp.ui.adapter.listener.EntitySelectedCallback;
 import com.rmuhamed.demoapp.ui.adapter.listener.ViewHolderClickCallback;
 import com.rmuhamed.demoapp.utils.ImageLoader;
@@ -23,7 +23,7 @@ public class EntityRecyclerAdapter extends RecyclerView.Adapter<EntityViewHolder
 
     private final Context context;
     private final EntitySelectedCallback entitySelectedCallback;
-    private List<Entity> items;
+    private List<User> items;
 
     public EntityRecyclerAdapter(EntitySelectedCallback mainFragmentCallback, Context context) {
         this.items = new ArrayList<>();
@@ -40,17 +40,17 @@ public class EntityRecyclerAdapter extends RecyclerView.Adapter<EntityViewHolder
 
     @Override
     public void onBindViewHolder(EntityViewHolder holder, int position) {
-        Entity anEntityForPosition = this.items.get(position);
+        User anEntityForPosition = this.items.get(position);
 
         assert anEntityForPosition != null;
 
-        holder.label.setText(anEntityForPosition.getGender() != null
-                ? anEntityForPosition.getGender()
+        holder.label.setText(anEntityForPosition.getSport() != null
+                ? anEntityForPosition.getSport()
                 : DUMMY_LABEL_FOR_RECYCLER_ITEM);
 
         ImageLoader.getInstance()
                 .with(this.context)
-                .loadFromUrl(anEntityForPosition.getThumbnail(), holder.picture);
+                .loadFromUrl(anEntityForPosition.getProfileImage(), holder.picture);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class EntityRecyclerAdapter extends RecyclerView.Adapter<EntityViewHolder
         return this.items != null ? this.items.size() : 0;
     }
 
-    public void fill(List<Entity> entities) {
+    public void fill(List<User> entities) {
         this.items = entities;
         //FORCE redraw
         this.notifyDataSetChanged();
@@ -66,7 +66,7 @@ public class EntityRecyclerAdapter extends RecyclerView.Adapter<EntityViewHolder
 
     @Override
     public void onItemClicked(int position) {
-        Entity aSelectedEntity = this.items.get(position);
+        User aSelectedEntity = this.items.get(position);
 
         this.entitySelectedCallback.onEntitySelected(aSelectedEntity);
     }

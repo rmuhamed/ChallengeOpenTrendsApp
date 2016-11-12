@@ -3,51 +3,35 @@ package com.rmuhamed.demoapp.api.wsresponsemodel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.rmuhamed.demoapp.model.Entity;
+import com.rmuhamed.demoapp.model.User;
+
+import java.util.List;
 
 public class Result {
 
-    @SerializedName("entity")
+    @SerializedName("users")
     @Expose
-    private Entity entity;
-    @SerializedName("seed")
+    private List<User> users;
+    @SerializedName("indo")
     @Expose
-    private String seed;
+    private Info info;
 
     /**
      * 
      * @return
-     *     The entity
+     *     The users
      */
-    public Entity getEntity() {
-        return entity;
+    public List<User> getUsers() {
+        return users;
     }
 
     /**
      * 
-     * @param entity
-     *     The entity
+     * @param users
+     *     The users list
      */
-    public void setEntity(Entity entity) {
-        this.entity = entity;
-    }
-
-    /**
-     * 
-     * @return
-     *     The seed
-     */
-    public String getSeed() {
-        return seed;
-    }
-
-    /**
-     * 
-     * @param seed
-     *     The seed
-     */
-    public void setSeed(String seed) {
-        this.seed = seed;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
 }

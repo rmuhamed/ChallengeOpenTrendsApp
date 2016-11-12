@@ -14,7 +14,7 @@ import com.crashlytics.android.Crashlytics;
 import com.rmuhamed.demoapp.R;
 import com.rmuhamed.demoapp.api.RestAPI;
 import com.rmuhamed.demoapp.api.request.GetEntitiesRequestCallback;
-import com.rmuhamed.demoapp.model.Entity;
+import com.rmuhamed.demoapp.model.User;
 import com.rmuhamed.demoapp.ui.activity.listener.MainFragmentCallback;
 import com.rmuhamed.demoapp.ui.adapter.EntityRecyclerAdapter;
 import com.rmuhamed.demoapp.ui.adapter.listener.EntitySelectedCallback;
@@ -76,7 +76,7 @@ public class MainFragment extends BaseFragment<MainFragmentCallback> implements 
     }
 
     @Override
-    public void onSuccess(List<Entity> entities) {
+    public void onSuccess(List<User> entities) {
         this.updateRootViewStatus();
 
         this.anAdapter.clear();
@@ -104,7 +104,7 @@ public class MainFragment extends BaseFragment<MainFragmentCallback> implements 
     }
 
     @Override
-    public void onEntitySelected(Entity entity) {
+    public void onEntitySelected(User entity) {
         this.activityCallback.onEntityShouldBeShownInDetailedMode(entity);
     }
 

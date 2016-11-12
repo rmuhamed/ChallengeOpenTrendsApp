@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.rmuhamed.demoapp.R;
-import com.rmuhamed.demoapp.model.Entity;
+import com.rmuhamed.demoapp.model.User;
 import com.rmuhamed.demoapp.ui.activity.listener.FragmentLifecycleCallback;
 import com.rmuhamed.demoapp.ui.activity.listener.MainFragmentCallback;
 import com.rmuhamed.demoapp.ui.fragment.MainFragment;
@@ -45,7 +45,7 @@ public class ItemListActivity extends AppCompatActivity implements MainFragmentC
     }
 
     @Override
-    public void onEntityShouldBeShownInDetailedMode(Entity entity) {
+    public void onEntityShouldBeShownInDetailedMode(User entity) {
         SecondaryFragment fragment = SecondaryFragment.newInstance(entity);
         fragment.setFragmentCallback(this);
         this.launchFragment(fragment, REPLACE_MODE);

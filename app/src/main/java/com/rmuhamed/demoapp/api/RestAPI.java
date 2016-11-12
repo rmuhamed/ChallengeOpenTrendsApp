@@ -8,7 +8,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.rmuhamed.demoapp.api.request.GetEntitiesRequest;
 import com.rmuhamed.demoapp.api.request.GetEntitiesRequestCallback;
-import com.rmuhamed.demoapp.model.Entity;
+import com.rmuhamed.demoapp.model.User;
 
 import java.util.List;
 
@@ -16,8 +16,7 @@ import java.util.List;
  * Created by rmuhamed on miércoles.
  */
 public class RestAPI implements IRestAPI {
-//VV8U-IIHJ-LJGC-A7QK
-    private static final String GET_URL = "https://randomapi.com/api/?key=LMW0-SW97-ISC4-FF25&id=t60ldyb&results=20";
+    private static final String GET_URL = "https://randomapi.com/api/qcum046q?key=VV8U-IIHJ-LJGC-A7QK";
     private static RestAPI instance;
     private RequestQueue requestQueue;
 
@@ -37,9 +36,9 @@ public class RestAPI implements IRestAPI {
 
     public void getEntities(final GetEntitiesRequestCallback listener) {
         GetEntitiesRequest jsonRequest = new GetEntitiesRequest(GET_URL,
-                new Response.Listener<List<Entity>>() {
+                new Response.Listener<List<User>>() {
                     @Override
-                    public void onResponse(List<Entity> entities) {
+                    public void onResponse(List<User> entities) {
                         listener.onSuccess(entities);
                     }
                 },

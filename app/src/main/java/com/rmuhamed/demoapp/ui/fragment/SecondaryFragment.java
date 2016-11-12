@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rmuhamed.demoapp.R;
-import com.rmuhamed.demoapp.model.Entity;
+import com.rmuhamed.demoapp.model.User;
 import com.rmuhamed.demoapp.ui.activity.listener.FragmentLifecycleCallback;
 import com.rmuhamed.demoapp.utils.ImageLoader;
 
@@ -34,7 +34,7 @@ public class SecondaryFragment extends BaseFragment<FragmentLifecycleCallback> {
 
     public SecondaryFragment() {}
 
-    public static SecondaryFragment newInstance(Entity entity) {
+    public static SecondaryFragment newInstance(User entity) {
         Bundle args = new Bundle();
         args.putParcelable(ENTITY, entity);
 
@@ -54,23 +54,23 @@ public class SecondaryFragment extends BaseFragment<FragmentLifecycleCallback> {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        Entity anEntity = this.getArguments().getParcelable(ENTITY);
+        User anEntity = this.getArguments().getParcelable(ENTITY);
 
         assert anEntity != null;
 
-        this.gender.setText(String.format(Locale.getDefault(), this.getString(R.string.gender), anEntity.getGender()));
-        this.description.setText(String.format(Locale.getDefault(), this.getString(R.string.description), anEntity.getDescription()));
+        this.gender.setText(String.format(Locale.getDefault(), this.getString(R.string.gender), anEntity.getName()));
+        this.description.setText(String.format(Locale.getDefault(), this.getString(R.string.description), anEntity.getSurname()));
 
         ImageLoader.getInstance()
                 .with(this.getContext())
-                .loadFromUrl(anEntity.getPicture(), this.mainPicture);
+                .loadFromUrl(anEntity.getProfileImage(), this.mainPicture);
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        this.activityCallback.onToolbarTitleShouldBeUpdated(this.getString(R.string.activity_item_list_main_fragment_title));
+        this.activityCallback.onToolbarTitleShouldBeUpdated(this.getString(R.string.activity_item_list_second_fragment_title));
     }
 
     /**

@@ -9,15 +9,15 @@ import com.android.volley.toolbox.JsonRequest;
 import com.google.gson.Gson;
 import com.rmuhamed.demoapp.api.wsresponsemodel.Result;
 import com.rmuhamed.demoapp.api.wsresponsemodel.WSResponse;
-import com.rmuhamed.demoapp.model.Entity;
+import com.rmuhamed.demoapp.model.User;
 import com.rmuhamed.demoapp.utils.StreamToStringConverter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetEntitiesRequest extends JsonRequest<List<Entity>> {
+public class GetEntitiesRequest extends JsonRequest<List<User>> {
 
-    public GetEntitiesRequest(String url, Response.Listener<List<Entity>> listener, Response.ErrorListener errorListener) {
+    public GetEntitiesRequest(String url, Response.Listener<List<User>> listener, Response.ErrorListener errorListener) {
         super(Method.GET, url, null, listener, errorListener);
 
         this.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
@@ -25,23 +25,16 @@ public class GetEntitiesRequest extends JsonRequest<List<Entity>> {
     }
 
     @Override
-    protected Response<List<Entity>> parseNetworkResponse(NetworkResponse networkResponse) {
-        Response<List<Entity>> result = null;
+    protected Response<List<User>> parseNetworkResponse(NetworkResponse networkResponse) {
+        Response<List<User>> result;
 
         try {
-            try {
-                Gson gson = new Gson();
-                WSResponse response =
-                        gson.fromJson(StreamToStringConverter.convert(networkResponse.data), WSResponse.class);
+            String rawResponse = StreamToStringConverter.convert(networkResponse.data);
+            WSResponse response = new Gson().fromJson(rawResponse, WSResponse.class);
 
-                List<Entity> entities = this.getModelInformationFromResponse(response);
+            List<User> entities = this.getModelInformationFromResponse(response);
 
-                result = Response.success(entities, HttpHeaderParser.parseCacheHeaders(networkResponse));
-
-            } catch (Exception e) {
-                result = Response.error(new VolleyError());
-            }
-
+            result = Response.success(entities, HttpHeaderParser.parseCacheHeaders(networkResponse));
         } catch (Exception e) {
             result = Response.error(new VolleyError());
         }
@@ -49,12 +42,12 @@ public class GetEntitiesRequest extends JsonRequest<List<Entity>> {
         return result;
     }
 
-    private List<Entity> getModelInformationFromResponse(WSResponse response) {
-        List<Entity> entities = null;
+    private List<User> getModelInformationFromResponse(WSResponse response) {
+        List<User> entities = null;
         if (response != null && response.getResults() != null) {
             entities = new ArrayList<>();
             for (Result aResult : response.getResults()) {
-                entities.add(aResult.getEntity());
+                entities.addAll(aResult.getUsers());
             }
         }
         return entities;
